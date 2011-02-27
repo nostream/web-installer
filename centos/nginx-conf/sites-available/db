@@ -5,7 +5,7 @@ server {
         access_log  /var/log/nginx/db.access.log;
 
         location / {
-                root   /usr/share/phpmyadmin/;
+                root   /usr/share/phpMyAdmin/;
                 index  index.php index.html index.htm;
                 # serve static files directly
                 if (-f $request_filename) {
@@ -19,7 +19,7 @@ server {
                 fastcgi_pass   127.0.0.1:9000;
                 fastcgi_index  index.php;
                 include fastcgi_params;
-                fastcgi_param  SCRIPT_FILENAME  /usr/share/phpmyadmin$fastcgi_script_name;
+                fastcgi_param  SCRIPT_FILENAME  /usr/share/phpMyAdmin$fastcgi_script_name;
         }
 
         location ~ /\.ht {

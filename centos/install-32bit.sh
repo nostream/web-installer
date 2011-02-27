@@ -28,6 +28,8 @@ chmod +x /usr/bin/php-fastcgi
 cp ${ROOT_PATH}/php-fastcgi/php-fastcgi-init /etc/init.d/php-fastcgi
 chmod +x /etc/init.d/php-fastcgi
 
+chown root:nginx /var/lib/php/session/
+
 /etc/init.d/php-fastcgi start
 chkconfig --add php-fastcgi
 chkconfig php-fastcgi on
