@@ -12,7 +12,6 @@ yum -y remove httpd
 yum -y install nginx
 
 cp -rf ${ROOT_PATH}/nginx-conf/* /etc/nginx/
-/etc/init.d/nginx start
 chkconfig --add nginx
 chkconfig nginx on
 
@@ -30,7 +29,6 @@ chmod +x /etc/init.d/php-fastcgi
 
 chown root:nginx /var/lib/php/session/
 
-/etc/init.d/php-fastcgi start
 chkconfig --add php-fastcgi
 chkconfig php-fastcgi on
 
@@ -41,7 +39,6 @@ yum -y install php-zend-optimizer
 #Install mysql
 
 yum --enablerepo=remi -y install mysql-server php-mysql
-/etc/init.d/mysqld start
 chkconfig --add mysqld
 chkconfig mysqld on
 
@@ -51,4 +48,7 @@ mysql_secure_installation
 #Install phpmyadmin
 yum --enablerepo=remi -y install phpmyadmin
 
-
+#Run
+/etc/init.d/nginx start
+/etc/init.d/php-fastcgi start
+/etc/init.d/mysqld start
