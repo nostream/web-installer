@@ -34,6 +34,10 @@ chown root:nginx /var/lib/php/session/
 chkconfig --add php-fastcgi
 chkconfig php-fastcgi on
 
+#Install zend-optimizer
+sh ${ROOT_PATH}/atomic.sh
+yum -y install php-zend-optimizer
+
 #Install mysql
 
 yum --enablerepo=remi -y install mysql-server php-mysql
