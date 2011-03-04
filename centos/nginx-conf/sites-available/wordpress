@@ -1,0 +1,41 @@
+server {
+        listen   80;
+        server_name  v2.scxiaochi.com;
+
+        access_log  /var/log/nginx/v2.scxiaochi.com.access.log;
+
+        location / {
+                root   /var/www/v2.scxiaochi.com/;
+                index  index.php index.html index.htm;
+                # serve static files directly
+                if (-f $request_filename) {
+                        access_log        off;
+                        expires           30d;
+                        break;
+                }
+
+		if (!-e $request_filename) {
+			rewrite ^.*$ /index.php last;
+         	}
+
+		#if (!-f $request_filename) {
+               	#	 rewrite (.*) /index.php;
+        	#}
+        }
+
+        location ~ \.php$ {
+                fastcgi_pass   127.0.0.1:9000;
+                fastcgi_index  index.php;
+                include fastcgi_params;
+                fastcgi_param  SCRIPT_FILENAME  /var/www/v2.scxiaochi.com$fastcgi_script_name;
+        }
+
+	location /scxiaochi-status {
+		stub_status on;
+		access_log off;
+        }
+
+        location ~ /\.ht {
+                deny  all;
+        }
+}
